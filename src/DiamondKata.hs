@@ -6,25 +6,21 @@ diamondKataStr xs =
   unlines $ diamondKata ' ' xs
 
 diamondKata :: a -> [a] -> [[a]]
-diamondKata x =
+diamondKata y xs =
     joinMirrored
   . map joinMirrored
-  . quarter x
-
-quarter :: a -> [a] -> [[a]]
-quarter empty xs =
-  zipWith (insertBehind empties) offsets xs
-  where
-    width'  = length xs - 1
-    empties = replicate width' empty
-    offsets = reverse [0..width']
-
-insertBehind :: [a] -> Int -> a -> [a]
-insertBehind xs i x =
-  concat [as, [x], bs]
-  where
-    (as,bs) = splitAt i xs
+  . quarter y $ xs
 
 joinMirrored :: [a] -> [a]
 joinMirrored xs =
   xs ++ tail (reverse xs)
+
+quarter :: a -> [a] -> [[a]]
+quarter y xs =
+  zipWith f xs [0..]
+  where
+    f x i = concat
+      [ replicate (length xs-1-i) y
+      , [x]
+      , replicate i y
+      ]
