@@ -7,3 +7,4 @@ auto-save-list
 tramp
 .\#*
 /.stack-work/
+.tramp_history
