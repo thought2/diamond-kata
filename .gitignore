@@ -8,3 +8,4 @@ tramp
 .\#*
 /.stack-work/
 .tramp_history
+*.nix
