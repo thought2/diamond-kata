@@ -1,36 +1,30 @@
 module DiamondKata
-  (diamondKata)
 where
 
-import Data.Maybe
+diamondKataStr :: String -> String
+diamondKataStr xs =
+  unlines $ diamondKata ' ' xs
 
-diamondKata :: String -> [String]
-diamondKata chars =
+diamondKata :: a -> [a] -> [[a]]
+diamondKata x =
     joinMirrored
   . map joinMirrored
-  . quarter
-  $ chars
+  . quarter x
 
-
-
-quarter :: String -> [String]
-quarter chars =
-  zipWith (placeIn width) chars offsets
+quarter :: a -> [a] -> [[a]]
+quarter empty xs =
+  zipWith (insertBehind empties) offsets xs
   where
-    width   = length chars
-    offsets = reverse [0..width-1]
+    width'  = length xs - 1
+    empties = replicate width' empty
+    offsets = reverse [0..width']
+
+insertBehind :: [a] -> Int -> a -> [a]
+insertBehind xs i x =
+  concat [as, [x], bs]
+  where
+    (as,bs) = splitAt i xs
 
 joinMirrored :: [a] -> [a]
 joinMirrored xs =
   xs ++ tail (reverse xs)
-
-placeIn :: Int -> Char -> Int -> String
-placeIn width char pos = concat
-  [ mkSpace pos
-  , [char]
-  , mkSpace $ width - pos - 1
-  ]
-  
-mkSpace :: Int -> String
-mkSpace n =
-  replicate n ' '
