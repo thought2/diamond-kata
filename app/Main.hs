@@ -14,7 +14,7 @@ usage       = unlines
   
 errArgN     = "Wrong number of arguments."
 errArgType  = "Arguments must be single characters."
-errArgOrder = "First argument must be lower than the second."
+errArgOrder = "First argument must be lower than or equal to the second."
 
 errorMsg msg = unlines [ msg, "", usage ]
 
@@ -49,7 +49,7 @@ checkLength = check
 checkOrd :: [Char] -> Either Err [Char]
 checkOrd = check
   (\xs -> case xs of
-      [a,b] | a < b -> True
+      [a,b] | a <= b -> True
       otherwise     -> False)
   (\[a,b] -> [a..b])
   errArgOrder
