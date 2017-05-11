@@ -37,7 +37,7 @@ C--
 ```
 So if the input is a list (e.g. of characters) and a padding element, the function producing a quarter coul look like this:
 
-```
+```haskell
 quarter :: a -> [a] -> [[a]]
 quarter y xs =
   zipWith f xs [0..]
@@ -55,7 +55,7 @@ When invoking this function with a characters `quarter '-' ['A','B','C']` we get
 
 The next thing we have to do is to do the mirroring. For this I created a helper function called `joinMirrored`
 
-```
+```haskell
 joinMirrored :: [a] -> [a]
 joinMirrored xs =
   xs ++ tail (reverse xs)
@@ -63,7 +63,7 @@ joinMirrored xs =
 
 Nothing special here, just a function that glues a list to its reversed counterpart, while avoiding to have the element doubled in the middle.
 
-```
+```haskell
 joinMirrored [1,2,3]
 --> [1,2,3,2,1]
 ```
@@ -84,7 +84,7 @@ C   C
 ```
 Almost done, we now just have to apply the same function to the result:
 
-`joinMirrired it`
+`joinMirrored it`
 ```
   A  
  B B 
@@ -95,7 +95,7 @@ C   C
 
 finally the `diamondKata` function looks like this:
 
-```
+```haskell
 diamondKata :: a -> [a] -> [[a]]
 diamondKata x =
     joinMirrored
@@ -105,7 +105,7 @@ diamondKata x =
 
 It's just a function composition of the above bits
 
-```
+```haskell
 diamondKata :: a -> [a] -> [[a]]
 diamondKata y xs =
     joinMirrored
@@ -115,7 +115,7 @@ diamondKata y xs =
 
 Even though I used strings and characters as examples, the above functions where defined generally for lists. The structure is meant for printing and works best with characters, so finally there's a wrapping function that makes the whole thing string specific:
 
-```
+```haskell
 diamondKataStr :: String -> String
 diamondKataStr xs =
   unlines $ diamondKata ' ' xs
