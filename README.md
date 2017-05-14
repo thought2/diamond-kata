@@ -97,22 +97,14 @@ finally the `diamondKata` function looks like this:
 
 ```haskell
 diamondKata :: a -> [a] -> [[a]]
-diamondKata x =
-    joinMirrored
-  . map joinMirrored
-  . quarter x
-```
-
-It's just a function composition of the above bits
-
-```haskell
-diamondKata :: a -> [a] -> [[a]]
 diamondKata y xs =
     joinMirrored
   . map joinMirrored
   . quarter y 
   $ xs
 ```
+
+It's just a function composition of the above bits.
 
 Even though I used strings and characters as examples, the above functions where defined in general for lists. The structure is meant for printing and works best with characters, so finally there's a wrapping function that makes the whole thing string specific and uses the actual space as padding:
 
