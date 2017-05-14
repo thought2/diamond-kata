@@ -114,4 +114,4 @@ diamondKataStr xs =
   unlines $ diamondKata ' ' xs
 ```
 
-The actual source file can be found [here](https://github.com/thought2/diamond-kata/blob/master/src/DiamondKata.hs)
+The actual source file can be found [here](https://github.com/thought2/diamond-kata/blob/master/src/DiamondKata.hs).
